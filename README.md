@@ -1,6 +1,6 @@
 # Metallum
 
-Little script that search and print out lyrics from http://metal-archives.com using the command-line.
+Search and print out lyrics from http://metal-archives.com using the command-line.
 
 ## Usage
 
