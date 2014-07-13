@@ -2,6 +2,8 @@
 
 Search and print out lyrics from http://metal-archives.com using the command-line.
 
+![sample](https://raw.githubusercontent.com/noeldelgado/metallum/master/img/UrutianO2X.gif)
+
 ## Usage
 
 1. Clone the repo
