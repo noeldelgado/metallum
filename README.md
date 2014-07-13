@@ -6,7 +6,9 @@ Little script that search and print out lyrics from http://metal-archives.com us
 
 Clone the repo, on the cl write:
 
-  python ~/<path-to-this-repo>/metallum.py <band_name> <song_tile>
+```
+python ~/<path-to-this-repo>/metallum.py <band_name> <song_tile>
+```
 
 Additionally, you can create an alias on your `.zshrc` or `.bash_profile`:
 
