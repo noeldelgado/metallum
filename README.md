@@ -12,6 +12,8 @@ python ~/<path-to-this-repo>/metallum.py <band_name> <song_tile>
 
 Additionally, you can create an alias on your `.zshrc` or `.bash_profile`:
 
-  alias metallum=""python ~/<path-to-repo>/metallum.py"
+```
+alias metallum="python ~/<path-to-repo>/metallum.py"
+```
 
 Now you can use it like `metallum therion quetzalcoatl`
