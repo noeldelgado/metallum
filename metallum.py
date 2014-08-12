@@ -22,7 +22,7 @@ def get_song_data(band, song):
 def get_lyrics_by_song_id(song_id):
     """Search on metal-archives for lyrics based on song_id"""
     url = "".join([site_url, "release/ajax-view-lyrics/id/", song_id])
-    return tags_re.sub('', urlopen(url).read().strip())
+    return tags_re.sub('', urlopen(url).read().strip()).decode('utf-8')
 
 def main():
     """Runs the program and handles command line options"""
@@ -39,8 +39,8 @@ def main():
         band_name = band_name_re.search(data[0]).group("name")
         song_title = data[3]
 
-        title = "".join([band_name, " - ", data[3], "\n"]).decode('utf-8')
-        lyrics = get_lyrics_by_song_id(song_id).decode('utf-8')
+        title = "".join([band_name, " - ", data[3], "\n"])
+        lyrics = get_lyrics_by_song_id(song_id)
 
         print "".join([title, "\n", lyrics])
     else:
