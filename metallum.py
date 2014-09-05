@@ -6,11 +6,12 @@ import json
 from urllib import urlopen, urlencode
 
 site_url = 'http://www.metal-archives.com/'
+lyrics_not_available = '(lyrics not available)'
 lyric_id_re = re.compile(r'id=.+[a-z]+.(?P<id>\d+)')
 band_name_re = re.compile(r'title="(?P<name>.*)\"')
 tags_re = re.compile(r'<[^>]+>')
 
-def get_song_data(band, song):
+def get_songs_data(band, song):
     """Search on metal-archives for song coincidences"""
     params = dict(
         bandName = band,
@@ -24,6 +25,21 @@ def get_lyrics_by_song_id(song_id):
     url = "".join([site_url, "release/ajax-view-lyrics/id/", song_id])
     return tags_re.sub('', urlopen(url).read().strip()).decode('utf-8')
 
+def iterate_songs_and_print(songs):
+    '''Iterate over returned song matches. If the lyrics are different than\
+    "(lyrics not available)" then break the loop and print them out.\
+    Otherwise the last song of the list will be printed.'''
+    for song in songs:
+        band_name = band_name_re.search(song[0]).group("name")
+        song_title = song[3]
+        song_id = lyric_id_re.search(song[4]).group("id")
+        lyrics = get_lyrics_by_song_id(song_id)
+        if lyrics != lyrics_not_available:
+            break
+
+    title = "".join([band_name, " - ", song_title, "\n"])
+    sys.exit("".join([title, "\n", lyrics]))
+
 def main():
     """Runs the program and handles command line options"""
     parser = argparse.ArgumentParser(description='Get lyrics from http://metal-archives.com')
@@ -31,20 +47,12 @@ def main():
     parser.add_argument('song', type=str, help='The title of the song. Ex: "Mopin Carol"')
     args = parser.parse_args()
 
-    song_data = get_song_data(args.band, args.song)
+    songs_data = get_songs_data(args.band, args.song)
 
-    if len(song_data):
-        data = song_data[0] # use the first coincidence
-        song_id = lyric_id_re.search(data[4]).group("id")
-        band_name = band_name_re.search(data[0]).group("name")
-        song_title = data[3]
+    if len(songs_data):
+        iterate_songs_and_print(songs_data)
 
-        title = "".join([band_name, " - ", data[3], "\n"])
-        lyrics = get_lyrics_by_song_id(song_id)
-
-        print "".join([title, "\n", lyrics])
-    else:
-        return sys.exit("Lyrics not found")
+    sys.exit("Lyrics not found")
 
 if __name__ == '__main__':
     main()
