@@ -38,7 +38,7 @@ def iterate_songs_and_print(songs):
             break
 
     title = "".join([band_name, " - ", song_title, "\n"])
-    sys.exit("".join([title, "\n", lyrics]))
+    sys.exit("".join(["\033[4m", title, "\n\033[0m", lyrics, "\n"]))
 
 def main():
     """Runs the program and handles command line options"""
@@ -52,7 +52,7 @@ def main():
     if len(songs_data):
         iterate_songs_and_print(songs_data)
 
-    sys.exit("Lyrics not found")
+    sys.exit("\n\033[031m Lyrics not found\n")
 
 if __name__ == '__main__':
     main()
