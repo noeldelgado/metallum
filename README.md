@@ -18,7 +18,7 @@ alias metallum="python ~/<path-to-repo>/metallum.py"
 alias met="python ~/<path-to-repo>/metallum.py"
 ```
 
-So you can use it like: 
+So you can use it like:
 ```bash
 met therion quetzalcoatl
 ```
@@ -38,3 +38,6 @@ Or the song ***"The Dark Liege Of Chaos Is Unleashed At The Ensorcelled Shrine O
 ```sh
 met balsagoth chaos
 ```
+
+## License
+MIT © [Noel Delgado](http://pixelia.me/)
