@@ -6,6 +6,8 @@ import json
 from urllib import urlopen, urlencode
 
 site_url = 'http://www.metal-archives.com/'
+url_search_songs = 'search/ajax-advanced/searching/songs?'
+url_lyrics = 'release/ajax-view-lyrics/id/'
 lyrics_not_available = '(lyrics not available)'
 lyric_id_re = re.compile(r'id=.+[a-z]+.(?P<id>\d+)')
 band_name_re = re.compile(r'title="(?P<name>.*)\"')
@@ -13,16 +15,13 @@ tags_re = re.compile(r'<[^>]+>')
 
 def get_songs_data(band, song):
     """Search on metal-archives for song coincidences"""
-    params = dict(
-        bandName = band,
-        songTitle = song
-    )
-    url = "".join([site_url, "search/ajax-advanced/searching/songs?", urlencode(params)])
+    params = dict(bandName = band, songTitle = song)
+    url = site_url + url_search_songs + urlencode(params)
     return json.load(urlopen(url))['aaData']
 
 def get_lyrics_by_song_id(song_id):
     """Search on metal-archives for lyrics based on song_id"""
-    url = "".join([site_url, "release/ajax-view-lyrics/id/", song_id])
+    url = site_url + url_lyrics + song_id
     return tags_re.sub('', urlopen(url).read().strip()).decode('utf-8')
 
 def iterate_songs_and_print(songs):
@@ -37,8 +36,8 @@ def iterate_songs_and_print(songs):
         if lyrics != lyrics_not_available:
             break
 
-    title = "".join([band_name, " - ", song_title, "\n"])
-    sys.exit("".join(["\033[4m", title, "\n\033[0m", lyrics, "\n"]))
+    title = band_name + " - " + song_title + "\n"
+    sys.exit("\033[4m" + title + "\n\033[0m" + lyrics + "\n")
 
 def main():
     """Runs the program and handles command line options"""
