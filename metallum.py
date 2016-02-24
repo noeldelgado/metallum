@@ -24,7 +24,7 @@ def get_lyrics_by_song_id(song_id):
     url = site_url + url_lyrics + song_id
     return tags_re.sub('', urlopen(url).read().strip()).decode('utf-8')
 
-def iterate_songs_and_print(songs):
+def iterate_songs_and_print(songs, args):
     '''Iterate over returned song matches. If the lyrics are different than\
     "(lyrics not available)" then break the loop and print them out.\
     Otherwise the last song of the list will be printed.'''
@@ -37,11 +37,16 @@ def iterate_songs_and_print(songs):
             break
 
     title = band_name + " - " + song_title + "\n"
-    sys.exit("\033[4m" + title + "\n\033[0m" + lyrics + "\n")
+    if args.notitle:
+        sys.exit("\033[0m" + lyrics + "\n")
+    else:
+        underline = "\033[4m"
+        sys.exit(underline + title + "\n\033[0m" + lyrics + "\n")
 
 def main():
     """Runs the program and handles command line options"""
     parser = argparse.ArgumentParser(description='Get lyrics from http://metal-archives.com')
+    parser.add_argument('-t', '--notitle', action="store_true", help="Don't show title.")
     parser.add_argument('band', type=str, help='The name of the band. Ex: "Dark Reality"')
     parser.add_argument('song', type=str, help='The title of the song. Ex: "Mopin Carol"')
     args = parser.parse_args()
@@ -49,7 +54,7 @@ def main():
     songs_data = get_songs_data(args.band, args.song)
 
     if len(songs_data):
-        iterate_songs_and_print(songs_data)
+        iterate_songs_and_print(songs_data, args)
 
     sys.exit("\n\033[031m Lyrics not found\n")
 
