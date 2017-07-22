@@ -1,28 +1,50 @@
 # Metallum
 
-Search and print out lyrics from [metal-archives.com](https://www.metal-archives.com) using the command-line.
+Fetch lyrics from [metal-archives.com](https://www.metal-archives.com) using the command-line.
 
 <img src="screenshot.gif" width="613">
 
 ## Usage
 
+Ensure you have [python](https://www.python.org/) installed. Then clone or download this repo.
+
 ```sh
-python ~/<path-to-repo>/metallum.py <band_name> <song_title>
+~ python <path-to-repo>/metallum.py <band_name> <song_title>
 ```
 
-Additionally, you can create an alias on your `.zshrc` or `.bash_profile`:
+Additionally, create an alias on your `.zshrc` or `.bash_profile`:
 
 ```sh
 alias met="python ~/<path-to-repo>/metallum.py"
 ```
 
-So you can use it like:
+So you can use it like this:
 
 ```sh
-met therion quetzalcoatl
+~ met therion quetzalcoatl
 ```
 
-### You don't have to type the whole thing
+That will search the song “quetzalcoatl” by the band “therion” and return the first coincidence. If not lyrics are found it will return “Lyrics not found”.
+
+By default it will show the artist and song names before the lyrics. To only display the lyrics pass the `-t` or `--notitle` option.
+
+### Arguments
+```
+~ met --help
+	usage: metallum.py [-h] [-t] band_name song_title
+
+	Fetch lyrics from http://metal-archives.com
+
+	positional arguments:
+	  band_name      The name of the band. e.g.: "Dark Reality"
+	  song_title     The title of the song. e.g.: "Mopin Carol"
+
+	optional arguments:
+	  -h, --help     show this help message and exit
+	  -t, --notitle  Don't show title.
+```
+
+### Don’t type the whole thing
 
 Sometimes song titles (or even band names) are too long to type or even to remember them.
 
