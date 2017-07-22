@@ -30,18 +30,17 @@ By default it will show the artist and song names before the lyrics. To only dis
 
 ### Arguments
 ```
-~ met --help
-	usage: metallum.py [-h] [-t] band_name song_title
+usage: metallum.py [-h] [-t] band_name song_title
 
-	Fetch lyrics from http://metal-archives.com
+Fetch lyrics from http://metal-archives.com
 
-	positional arguments:
-	  band_name      The name of the band. e.g.: "Dark Reality"
-	  song_title     The title of the song. e.g.: "Mopin Carol"
+positional arguments:
+  band_name      The name of the band. e.g.: "Dark Reality"
+  song_title     The title of the song. e.g.: "Mopin Carol"
 
-	optional arguments:
-	  -h, --help     show this help message and exit
-	  -t, --notitle  Don't show title.
+optional arguments:
+  -h, --help     show this help message and exit
+  -t, --notitle  Don't show title.
 ```
 
 ### Don’t type the whole thing
