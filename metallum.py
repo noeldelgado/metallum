@@ -46,7 +46,7 @@ def iterate_songs_and_print(songs, args):
 
 def main():
     """Runs the program and handles command line options"""
-    parser = argparse.ArgumentParser(description='Fetch lyrics from http://metal-archives.com')
+    parser = argparse.ArgumentParser(description='Fetch lyrics from https://metal-archives.com')
     parser.add_argument('-t', '--notitle', action="store_true", help="don't show the artist and song names before the lyrics")
     parser.add_argument('band_name', type=str, help='The name of the band. e.g.: "Dark Reality"')
     parser.add_argument('song_title', type=str, help='The title of the song. e.g.: "Mopin Carol"')
