@@ -6,6 +6,9 @@
     "met": "metallum.py",
     "metallum": "metallum.py"
   },
+  "files": [
+    "metallum.py"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/noeldelgado/metallum.git"
