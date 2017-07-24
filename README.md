@@ -45,7 +45,7 @@ By default it will show the artist and song names before the lyrics. To only dis
 ```
 usage: metallum.py [-h] [-t] band_name song_title
 
-Fetch lyrics from http://metal-archives.com
+Fetch lyrics from https://metal-archives.com
 
 positional arguments:
   band_name      The name of the band. e.g.: "Dark Reality"
