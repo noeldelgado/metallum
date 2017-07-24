@@ -1,24 +1,37 @@
 # Metallum
 
+[![npm-image](https://img.shields.io/npm/v/metallum.svg)](https://www.npmjs.com/package/metallum)
+![license-image](https://img.shields.io/npm/l/metallum.svg)
+
 Fetch lyrics from [metal-archives.com](https://www.metal-archives.com) using the command-line.
 
 <img src="screenshot.gif" width="613">
 
+## Install
+Ensure you have [python](https://www.python.org/) installed.
+
+### NPM
+
+```sh
+$ npm install --global metallum
+```
+
+### Manual Install
+
+- Clone or download this repo.
+- Create an alias on your `.zshrc` or `.bash_profile`:
+
+	```sh
+	alias met="python ~/<path-to-repo>/metallum.py"
+	```
+
 ## Usage
 
-Ensure you have [python](https://www.python.org/) installed. Then clone or download this repo.
-
 ```sh
-~ python <path-to-repo>/metallum.py <band_name> <song_title>
+~ met <band_name> <song_title>
 ```
 
-Additionally, create an alias on your `.zshrc` or `.bash_profile`:
-
-```sh
-alias met="python ~/<path-to-repo>/metallum.py"
-```
-
-So you can use it like this:
+### Example
 
 ```sh
 ~ met therion quetzalcoatl
