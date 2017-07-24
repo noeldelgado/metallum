@@ -1,0 +1,19 @@
+{
+  "name": "metallum",
+  "version": "1.0.0",
+  "description": "Fetch lyrics from metal-archives.com using the command-line",
+  "bin": {
+    "met": "metallum.py",
+    "metallum": "metallum.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noeldelgado/metallum.git"
+  },
+  "author": "Noel Delgado <auhcsei@gmail.com> (http://pixelia.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/noeldelgado/metallum/issues"
+  },
+  "homepage": "https://github.com/noeldelgado/metallum#readme"
+}
