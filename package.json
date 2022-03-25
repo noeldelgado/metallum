@@ -1,6 +1,6 @@
 {
   "name": "metallum",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Fetch lyrics from metal-archives.com using the command-line",
   "bin": {
     "met": "metallum.py",
