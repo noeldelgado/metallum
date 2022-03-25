@@ -1,28 +1,34 @@
 #!/usr/bin/env python
-import sys
-import argparse
-import re
-import json
-from urllib import urlopen, urlencode
 
-site_url = 'https://www.metal-archives.com/'
+import argparse, json, re, sys
+try:
+    import urllib2 as urlreq
+    from urllib import urlencode
+except:
+    import urllib.request as urlreq
+    from urllib.parse import urlencode
+
+base_url = 'https://www.metal-archives.com/'
 url_search_songs = 'search/ajax-advanced/searching/songs?'
 url_lyrics = 'release/ajax-view-lyrics/id/'
 lyrics_not_available = '(lyrics not available)'
 lyric_id_re = re.compile(r'id=.+[a-z]+.(?P<id>\d+)')
 band_name_re = re.compile(r'title="(?P<name>.*)\"')
 tags_re = re.compile(r'<[^>]+>')
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0'}
 
 def get_songs_data(band_name, song_title):
     """Search on metal-archives for song coincidences"""
     params = dict(bandName = band_name, songTitle = song_title)
-    url = site_url + url_search_songs + urlencode(params)
-    return json.load(urlopen(url))['aaData']
+    url = base_url + url_search_songs + urlencode(params)
+    req = urlreq.Request(url, headers=headers)
+    return json.load(urlreq.urlopen(req))['aaData']
 
 def get_lyrics_by_song_id(song_id):
     """Search on metal-archives for lyrics based on song_id"""
-    url = site_url + url_lyrics + song_id
-    return tags_re.sub('', urlopen(url).read().strip()).decode('utf-8')
+    url = base_url + url_lyrics + song_id
+    req = urlreq.Request(url, headers=headers)
+    return tags_re.sub('', urlreq.urlopen(req).read().strip().decode('utf-8'))
 
 def iterate_songs_and_print(songs, args):
     '''Iterate over returned song matches. If the lyrics are different than\
@@ -52,10 +58,12 @@ def main():
     parser.add_argument('song_title', type=str, help='The title of the song. e.g.: "Mopin Carol"')
     args = parser.parse_args()
 
-    songs_data = get_songs_data(args.band_name, args.song_title)
-
-    if len(songs_data):
-        iterate_songs_and_print(songs_data, args)
+    try:
+        songs_data = get_songs_data(args.band_name, args.song_title)
+        if len(songs_data):
+            iterate_songs_and_print(songs_data, args)
+    except Exception as e:
+        sys.exit(e)
 
     sys.exit("\n\033[031m Lyrics not found\n")
 
